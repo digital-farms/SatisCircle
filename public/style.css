@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Скрытие скроллбара */
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#game-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: transparent;
+}
+
+#gameCanvas {
+    display: block;
+    background: transparent;
+}
+
+
+/* Оверлей победителя */
+#winner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.95) 100%);
+}
+
+#winner-overlay.visible {
+    opacity: 1;
+}
+
+#winner-overlay.hidden {
+    display: none;
+}
+
+.winner-content {
+    text-align: center;
+    animation: winner-appear 0.8s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.winner-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 4px solid #ffd700;
+    box-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.8),
+        0 0 60px rgba(153, 51, 255, 0.5);
+    margin-bottom: 30px;
+    animation: avatar-glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes avatar-glow {
+    from {
+        box-shadow: 
+            0 0 30px rgba(255, 215, 0, 0.8),
+            0 0 60px rgba(153, 51, 255, 0.5);
+    }
+    to {
+        box-shadow: 
+            0 0 50px rgba(255, 215, 0, 1),
+            0 0 100px rgba(153, 51, 255, 0.8);
+    }
+}
+
+@keyframes winner-appear {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.winner-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #ffd700;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    text-shadow: 
+        0 0 20px rgba(255, 215, 0, 0.8),
+        0 0 40px rgba(255, 215, 0, 0.6);
+    animation: glow 1.5s ease-in-out infinite alternate;
+    margin-bottom: 30px;
+}
+
+.winner-name {
+    font-size: 80px;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 
+        0 0 30px rgba(255, 255, 255, 0.9),
+        0 0 60px rgba(153, 51, 255, 0.8),
+        0 0 100px rgba(153, 51, 255, 0.5);
+    animation: winner-pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 
+            0 0 20px rgba(255, 215, 0, 0.8),
+            0 0 40px rgba(255, 215, 0, 0.6),
+            0 0 60px rgba(255, 215, 0, 0.4);
+    }
+    to {
+        text-shadow: 
+            0 0 30px rgba(255, 215, 0, 1),
+            0 0 60px rgba(255, 215, 0, 0.8),
+            0 0 90px rgba(255, 215, 0, 0.6);
+    }
+}
+
+@keyframes winner-pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.02); }
+}
